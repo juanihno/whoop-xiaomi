@@ -1,0 +1,24 @@
+---
+description: Layered architecture, import graph, and implementation order for whoop-xiaomi
+alwaysApply: true
+---
+
+# Architecture
+
+Read `docs/ARCHITECTURE.md` and `docs/DECISIONS.md` before structural changes.
+
+- Layers: UI, Data, Device, Algorithms, Coach, Testing.
+- UI never imports Xiaomi or BLE. Device access only through `DeviceAdapter` (when it exists).
+- Do not add SQLite, BLE, algorithms, Coach, or Fake Device until the user approves that step.
+- Do not install BLE libraries.
+- Keep repo/slug `whoop-xiaomi` until a rename is requested.
+- Do not create a root `LICENSE` file unless asked.
+- Do not commit unless the user asks.
+
+```ts
+// ❌ BAD — screen talking to a vendor
+import { XiaomiBand } from '@/devices/xiaomi';
+
+// ✅ GOOD — screen reads a repository / view-model
+import { useTodaySummary } from '@/data/repositories/today';
+```

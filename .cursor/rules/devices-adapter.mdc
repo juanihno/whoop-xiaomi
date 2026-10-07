@@ -1,0 +1,23 @@
+---
+description: Device adapters emit raw normalized samples; Fake before Xiaomi BLE
+globs: src/devices/**/*.ts
+alwaysApply: false
+---
+
+# Device adapter
+
+All wearables implement `DeviceAdapter`. UI never imports a vendor module.
+
+- Emit **raw** normalized samples only (HR, steps, sleep epochs, …). Derived scores belong to algorithms.
+- `FakeDeviceAdapter` ships before any Xiaomi BLE work.
+- `src/devices/xiaomi` stays empty until BLE is approved. No BLE packages until then.
+- Band 9 capabilities are `unknown` until `docs/DEVICE_CAPABILITIES.md` is updated from research (not from copied AGPL code).
+
+```ts
+// ❌ BAD
+await xiaomiClient.getRecoveryScore();
+
+// ✅ GOOD
+const samples = await adapter.sync(); // HeartRateSample[]
+await ingestRaw(samples);
+```

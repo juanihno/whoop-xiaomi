@@ -1,0 +1,20 @@
+---
+description: Do not copy AGPL code from Kodo or Gadgetbridge; OpenStrap is UX-only
+alwaysApply: true
+---
+
+# No AGPL copy
+
+Intended project license is MIT, but `LICENSE` is not in the repo yet. See `docs/LICENSES.md`.
+
+- **Forbidden:** copying or porting source from Kodo (AGPL) or Gadgetbridge (AGPL), including Kotlin BLE engines, parsers, and protobuf stacks.
+- **OpenStrap Edge (MIT):** UX, navigation, and product concepts only. Do not port Flutter or WHOOP protocol code.
+- Study public docs and write original TypeScript. If a MIT snippet is copied later, record URL + attribution in `docs/LICENSES.md`.
+
+```ts
+// ❌ BAD
+// pasted from vendor/Gadgetbridge or Kodo android-port
+
+// ✅ GOOD
+// original adapter implementing our DeviceAdapter contract
+```

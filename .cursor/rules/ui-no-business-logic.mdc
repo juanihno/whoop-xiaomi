@@ -1,0 +1,22 @@
+---
+description: UI components must not contain health business logic
+globs: src/app/**/*.tsx,src/ui/**/*.tsx
+alwaysApply: false
+---
+
+# UI has no business logic
+
+Screens and `src/ui` components render state. They do not compute HRV, recovery, strain, or sleep scores.
+
+- No SQL, BLE, or Xiaomi protocol in components.
+- Placeholder screens may show static copy that the screen is not wired yet.
+- Do not hardcode production health numbers except in the archived `App.tsx` mock.
+- When data exists: missing value → `—`, never a made-up metric.
+
+```tsx
+// ❌ BAD
+const recovery = (hrv / rhr) * 100;
+
+// ✅ GOOD
+<Text>{summary.recoveryPercent ?? '—'}</Text>
+```

@@ -1,3 +1,5 @@
+// Unused after Expo Router. Kept so the archived App.tsx mock still compiles.
+// App entry is package.json "main": "expo-router/entry".
 import { registerRootComponent } from 'expo';
 
 import App from './App';

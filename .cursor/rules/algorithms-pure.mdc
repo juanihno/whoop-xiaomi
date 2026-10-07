@@ -1,0 +1,29 @@
+---
+description: Health algorithms must be pure, versioned, and cited
+globs: src/algorithms/**/*.ts
+alwaysApply: false
+---
+
+# Algorithms stay pure
+
+`src/algorithms` (when created) is functions + tests. No React components, no BLE, no direct SQLite if repositories can be injected.
+
+- Cite the method in `docs/ALGORITHM_NOTES.md` before implementing.
+- Never claim WHOOP equivalence.
+- Version outputs (`algorithmId`, `version`).
+- If required inputs are missing, return an explicit empty/insufficient result — do not fabricate.
+
+```ts
+// ❌ BAD
+export function recovery(): number {
+  return 78; // looks like WHOOP
+}
+
+// ✅ GOOD
+export function computeRecovery(input: RecoveryInput): RecoveryResult {
+  if (!input.hasRequiredSamples) {
+    return { status: 'insufficient', algorithmId: 'recovery', version: 1 };
+  }
+  // documented formula
+}
+```
